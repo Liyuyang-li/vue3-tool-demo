@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { useMouse, store } from "../assets/js/mouse.js";
+import {  store } from "../assets/js/common.js";
 import { onMounted, ref, reactive } from "vue";
 import { get, post } from "../assets/js/axios.js";
 const active = ref(0);

@@ -1,8 +1,8 @@
-// mouse.js 组合式函数和mixins用法一样
-import { ref, onMounted, onUnmounted,reactive } from 'vue'
+// common.js 组合式函数和mixins用法一样
+import { ref, onMounted, onUnmounted, reactive } from 'vue';
 
 // 按照惯例，组合式函数名以“use”开头
-export function useMouse() {
+export function usecommon() {
   // 被组合式函数封装和管理的状态
   const x = ref(0)
   const y = ref(0)
@@ -15,8 +15,8 @@ export function useMouse() {
 
   // 一个组合式函数也可以挂靠在所属组件的生命周期上
   // 来启动和卸载副作用
-  onMounted(() => window.addEventListener('mousemove', update))
-  onUnmounted(() => window.removeEventListener('mousemove', update))
+  onMounted(() => window.addEventListener('commonmove', update))
+  onUnmounted(() => window.removeEventListener('commonmove', update))
 
   // 通过返回值暴露所管理的状态
   return { x, y }
@@ -26,6 +26,7 @@ export function useMouse() {
 export const store = reactive({
   count: 0
 })
+
 
 // 除了我们这里用到的单个响应式对象作为一个 store 之外，
 // 你还可以使用其他响应式 API 例如 ref() 或是 computed()，

@@ -26,6 +26,8 @@ axios.defaults.withCredentials = false;//例如：登录校验session和cookie
  * 看服务器要求什么格式
  */
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded' //声明请求格式
+// axios.defaults.headers['Access-Control-Allow-Origin'] = '*' 
+
 // axios.defaults.transformRequest = data => qs.stringify(data)  //qs是第三方库，转换为x-www-form-urlencoded
 /**
  * 设置请求拦截器：----在项目中发请求（请求没有发出去）可以做一些事情
