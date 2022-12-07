@@ -3,19 +3,19 @@ import axios from "axios";
 //引入qs模块，用来序列化post类型的数据
 // import qs from 'qs'
 // 配置不同环境下，调用不同接口
-switch (process.env.NODE_ENV) {
-    // 生产环境，部署到服务器上的环境
-    case 'production':
-        axios.defaults.baseURL = 'http://api.zhengqinan.cn';
-        break;
-    //设置测式环境的接口地址
-    case 'text':
-        axios.defaults.baseURL = 'http://api.zhengqinantext.cn';
-        break;
-    //开发环境接口地址
-    default:
-        axios.defaults.baseURL = 'https://apis.tianapi.com'
-}
+// switch (process.env.NODE_ENV) {
+//     // 生产环境，部署到服务器上的环境
+//     case 'production':
+//         axios.defaults.baseURL = 'http://api.zhengqinan.cn';
+//         break;
+//     //设置测式环境的接口地址
+//     case 'text':
+//         axios.defaults.baseURL = 'http://api.zhengqinantext.cn';
+//         break;
+//     //开发环境接口地址
+//     default:
+//         axios.defaults.baseURL = 'https://apis.tianapi.com'
+// }
 /**
  * 设置超时时间和跨域是否允许携带凭证
  */

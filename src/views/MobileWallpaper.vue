@@ -14,6 +14,9 @@ const classifiction = ref([
   { name: "美女", isSelect: false },
   { name: "二次元", isSelect: false },
   { name: "风景", isSelect: false },
+  { name: "手机壁纸", isSelect: false },
+  // { name: "LOL", isSelect: false },
+  { name: "Bing", isSelect: false },
 ]);
 const selectedClassifiction = ref([]);
 const colors = ref([
@@ -24,10 +27,18 @@ const colors = ref([
   "#f5b1aa",
   "#d3ccd6",
 ]);
-const list = ref([]);
+const list = ref({
+  acgimg: [],
+  girl: [],
+  view: [],
+  lolskin: [],
+  bing: [],
+  "mobil.girl": [],
+});
 const loading = ref(false);
 const finished = ref(false);
-
+const sort = ref("acgimg");
+const count = ref(0);
 async function onLoad1() {
   // 调用api接口，并且提供了两个参数
 
@@ -61,52 +72,67 @@ function onSearch(val) {
   console.log("val", val);
 }
 function tottleTag(item, i) {
-  classifiction.value.forEach(v=>{
+  count.value++;
+  classifiction.value.forEach((v) => {
     v.isSelect = false;
-  })
+  });
   classifiction.value[i].isSelect = !item.isSelect;
 
-}
+  let selected = item.name;
+  sort.value = selected.includes("二次元")
+    ? "acgimg"
+    : selected.includes("动漫")
+    ? "acgimg"
+    : selected.includes("美女")
+    ? "girl"
+    : selected.includes("风景")
+    ? "view"
+    : selected.includes("手机壁纸")
+    ? "mobil.girl"
+    : selected.includes("LOL")
+    ? "lolskin"
+    : selected.includes("Bing")
+    ? "bing"
+    : "acgimg";
 
+  console.log("sort.value", sort.value);
+  if (!selectedClassifiction.value.join().includes(item.name)) {
+    initLoad();
+  }
+  selectedClassifiction.value.push(item.name);
+}
 async function onLoad() {
   let params = { type: "json" };
-  let sort = "acgimg";
-  let selected = selectedClassifiction.value.toString();
-  if (selectedClassifiction.value.length > 0) {
-    sort = selected.includes("二次元")
-      ? "acgimg"
-      : selected.includes("动漫")
-      ? "acgimg"
-      : selected.includes("美女")
-      ? "girl"
-       : selected.includes("风景")
-      ? "view"
-      : "acgimg";
-  }
-  await get(`https://api.vvhan.com/api/${sort}`, params).then((res) => {
-    console.log(res);
+  await get(`/api/${sort.value}`, params).then((res) => {
     if (res.success) {
       loading.value = false;
-      let obj = res.info;
-      obj.imgurl = res.imgurl;
-      list.value.push(obj);
+      let obj = {};
+      if (sort.value == "bing") {
+        obj.imgurl = res.data.url;
+        list.value[sort.value].push(obj);
+        console.log("bing", list.value[sort.value]);
+      } else {
+        obj.imgurl = res.imgurl;
+        list.value[sort.value].push(obj);
+      }
     } else {
       loading.value = false;
     }
   });
-  if (list.value.length == 5) {
+  if (list.value[sort.value].length == 10) {
     finished.value = true;
   }
 }
 function initLoad() {
-  list.value = [];
+  window.scrollTo(0,0)
+  list.value[sort.value] = [];
   loading.value = true;
+  finished.value = false;
   onLoad();
 }
-
 function imagePreview(index) {
   let arr = [];
-  list.value.forEach((v) => {
+  list.value[sort.value].forEach((v) => {
     arr.push(v.imgurl);
   });
   ImagePreview({
@@ -115,19 +141,23 @@ function imagePreview(index) {
   });
 }
 // 可以直接侦听一个 ref
-watch(
-  classifiction,
-  (newclassifiction, oldclassifiction) => {
-    selectedClassifiction.value = [];
-    newclassifiction.forEach((v) => {
-      if (v.isSelect) {
-        selectedClassifiction.value.push(v.name);
-      }
-    });
-    console.log(selectedClassifiction.value);
-  },
-  { deep: true }
-);
+// watch(
+//   classifiction,
+//   (newclassifiction, oldclassifiction) => {
+//     selectedClassifiction.value = [];
+//     newclassifiction.forEach((v) => {
+//       if (v.isSelect) {
+//         selectedClassifiction.value.push(v.name);
+//       }
+//     });
+//   },
+//   { deep: true }
+// );
+watch(searchValue, (newsearchValue) => {
+  selectedClassifiction.value = [];
+  selectedClassifiction.value.push(newsearchValue);
+  initLoad();
+});
 onMounted(() => {
   // init();
 });
@@ -136,7 +166,7 @@ onMounted(() => {
   <div class="MobileWallpaper">
     <div class="fix-box">
       <van-nav-bar
-        title="手机壁纸"
+        title="精美壁纸"
         left-text=""
         left-arrow
         @click-left="onClickLeft"
@@ -145,7 +175,6 @@ onMounted(() => {
         v-model="searchValue"
         shape="round"
         placeholder="请输入搜索关键词"
-        autofocus
         @search="onSearch"
       />
       <div class="classifiction">
@@ -170,7 +199,7 @@ onMounted(() => {
     >
       <div
         class="img-box"
-        v-for="(item, i) in list"
+        v-for="(item, i) in list[sort]"
         :key="item"
         @click="imagePreview(i)"
       >
@@ -209,6 +238,7 @@ onMounted(() => {
   .load-btn {
     text-align: center;
     font-style: italic;
+    text-decoration: underline;
     &:hover {
       color: var(--van-primary-color);
       text-decoration: underline;

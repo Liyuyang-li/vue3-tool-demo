@@ -7,7 +7,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
     },
     {
       path: '/about',
@@ -20,7 +23,10 @@ const router = createRouter({
     {
       path: '/MobileWallpaper',
       name: 'MobileWallpaper',
-      component: () => import('../views/MobileWallpaper.vue')
+      component: () => import('../views/MobileWallpaper.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
     }
   ]
 })

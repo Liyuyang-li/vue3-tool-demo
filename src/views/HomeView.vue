@@ -2,24 +2,35 @@
 <script setup>
 import { store } from "../assets/js/common.js";
 import { onMounted, ref, reactive } from "vue";
+import { get, post } from "../assets/js/axios.js";
 import { useRouter } from "vue-router";
 const router = useRouter();
 // import { $ref } from 'vue/macros';//响应式语法糖，未开放
 const active = ref(0);
 const tools = ref([
-  { message: "手机壁纸", router: "MobileWallpaper" },
+  { message: "精美壁纸", router: "MobileWallpaper" },
   { message: "音乐", router: "" },
 ]);
 
 function clickItem(item) {
-  console.log("????", router);
   router.push(item.router);
 }
+function loadSnow() {
+  if (document.getElementById("snow").src != "") {
+    document.getElementById("snow").src = "";
+  }
+  if (document.getElementById("snow").src == "") {
+    console.log("loadSnow");
+    document.getElementById("snow").src = "https://api.vvhan.com/api/snow";
+  }
+}
 </script>
-
 <template>
   <div class="home">
     <van-nav-bar title="工具合集" />
+    <div class="snow" @click="loadSnow">
+      <img src="@/assets/images/snow.png" alt="" />
+    </div>
     <div class="main">
       <van-sidebar v-model="active">
         <van-sidebar-item title="娱乐工具" />
@@ -44,6 +55,17 @@ function clickItem(item) {
 .main {
   display: flex;
   height: calc(100vh - 46px);
+}
+.snow {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  z-index: 999;
+  img {
+    width: 100%;
+  }
 }
 .content {
   flex: 1;
