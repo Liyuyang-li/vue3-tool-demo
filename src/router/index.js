@@ -27,6 +27,14 @@ const router = createRouter({
       meta: {
         keepAlive: true // 该路由会被缓存
       }
+    },
+    {
+      path: '/RandomJoke',
+      name: 'RandomJoke',
+      component: () => import('../views/RandomJoke.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
     }
   ]
 })

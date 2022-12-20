@@ -21,20 +21,22 @@ export default defineConfig({
     port: 9001,
     // 是否开启 https
     https: false,
-    proxy: {
-      '/api': {
-        target: 'https://api.vvhan.com/api',	//实际请求地址
-        ws: true,//代理websocked
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      },
-    }
+    // proxy: {
+    //   '/api': {
+    //     target: 'https://api.vvhan.com/api',	//实际请求地址
+    //     ws: true,//代理websocked
+    //     changeOrigin: true,
+    //     rewrite: (path) => path.replace(/^\/api/, '')
+    //   },
+    // }
   },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  //打包添加
+  base:'./'
 })
 
 

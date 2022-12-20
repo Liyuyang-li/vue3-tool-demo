@@ -11,7 +11,10 @@ const tools = ref([
   { message: "精美壁纸", router: "MobileWallpaper" },
   { message: "音乐", router: "" },
 ]);
-
+const activeNames = ref(["1", "2"]);
+const textTools = ref([
+  { message: "随机笑话", router: "RandomJoke" },
+]);
 function clickItem(item) {
   router.push(item.router);
 }
@@ -32,19 +35,35 @@ function loadSnow() {
       <img src="@/assets/images/snow.png" alt="" />
     </div>
     <div class="main">
-      <van-sidebar v-model="active">
+      <!-- <van-sidebar v-model="active">
         <van-sidebar-item title="娱乐工具" />
-      </van-sidebar>
-      <div class="content">
-        <div
-          class="tool-item"
-          v-for="(item, i) in tools"
-          :key="i"
-          @click="clickItem(item)"
-        >
-          {{ item.message }}
-        </div>
-      </div>
+      </van-sidebar> -->
+      <van-collapse v-model="activeNames" :border="false">
+        <van-collapse-item title="娱乐工具" name="1" :border="false" icon="graphic">
+          <div class="content">
+            <div
+              class="tool-item"
+              v-for="(item, i) in tools"
+              :key="i"
+              @click="clickItem(item)"
+            >
+              {{ item.message }}
+            </div>
+          </div>
+        </van-collapse-item>
+        <van-collapse-item title="文字应用" name="2" :border="false" icon="column">
+          <div class="content">
+            <div
+              class="tool-item"
+              v-for="(item, i) in textTools"
+              :key="i"
+              @click="clickItem(item)"
+            >
+              {{ item.message }}
+            </div>
+          </div>
+        </van-collapse-item>
+      </van-collapse>
     </div>
   </div>
 </template>
@@ -53,7 +72,6 @@ function loadSnow() {
   height: 100vh;
 }
 .main {
-  display: flex;
   height: calc(100vh - 46px);
 }
 .snow {
@@ -69,7 +87,6 @@ function loadSnow() {
 }
 .content {
   flex: 1;
-  padding: 15px;
   display: flex;
   .tool-item {
     color: var(--van-text-color-2);
@@ -91,5 +108,11 @@ function loadSnow() {
 .van-sidebar-item {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+}
+.van-collapse-item {
+  margin-bottom: 8px;
+}
+:deep(.van-cell__left-icon){
+  color: var(--van-primary-color);
 }
 </style>

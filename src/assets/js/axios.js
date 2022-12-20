@@ -26,7 +26,10 @@ axios.defaults.withCredentials = false;//例如：登录校验session和cookie
  * 看服务器要求什么格式
  */
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded' //声明请求格式
-// axios.defaults.headers['Access-Control-Allow-Origin'] = '*' 
+// axios.defaults.headers['Access-Control-Allow-Origin'] = '*' //允许所有资源跨域
+// axios.defaults.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Cookie, Accept, Authorization' 
+// axios.defaults.headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, OPTIONS, DELETE, HEAD' //运行的请求方法
+// axios.defaults.headers['Access-Control-Allow-Credentials'] = true //运行客户端携带证书式访问
 
 // axios.defaults.transformRequest = data => qs.stringify(data)  //qs是第三方库，转换为x-www-form-urlencoded
 /**

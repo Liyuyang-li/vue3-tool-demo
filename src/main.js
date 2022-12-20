@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { Button, TreeSelect, Collapse, CollapseItem, Sidebar, SidebarItem, NavBar, Search, Tag, List } from 'vant';
+import { Button, TreeSelect, Collapse, CollapseItem, Sidebar, SidebarItem, NavBar, Search, Tag, List} from 'vant';
 import './assets/css/main.css'
-
+import 'animate.css';
 const app = createApp(App)
 
 app.use(router)

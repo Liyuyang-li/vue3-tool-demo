@@ -103,7 +103,7 @@ function tottleTag(item, i) {
 }
 async function onLoad() {
   let params = { type: "json" };
-  await get(`/api/${sort.value}`, params).then((res) => {
+  await get(`https://api.vvhan.com/api/${sort.value}`, params).then((res) => {
     if (res.success) {
       loading.value = false;
       let obj = {};
