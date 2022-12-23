@@ -17,6 +17,7 @@ const classifiction = ref([
   { name: "手机壁纸", isSelect: false },
   // { name: "LOL", isSelect: false },
   { name: "Bing", isSelect: false },
+  { name: "猫", isSelect: false },
 ]);
 const selectedClassifiction = ref([]);
 const colors = ref([
@@ -34,6 +35,7 @@ const list = ref({
   lolskin: [],
   bing: [],
   "mobil.girl": [],
+  cat: [],
 });
 const loading = ref(false);
 const finished = ref(false);
@@ -93,6 +95,8 @@ function tottleTag(item, i) {
     ? "lolskin"
     : selected.includes("Bing")
     ? "bing"
+    : selected.includes("猫")
+    ? "cat"
     : "acgimg";
 
   console.log("sort.value", sort.value);
@@ -103,14 +107,22 @@ function tottleTag(item, i) {
 }
 async function onLoad() {
   let params = { type: "json" };
-  await get(`https://api.vvhan.com/api/${sort.value}`, params).then((res) => {
-    if (res.success) {
+  let url =
+    sort.value == "cat"
+      ? "https://api.thecatapi.com/v1/images/search?limit=10"
+      : `https://api.vvhan.com/api/${sort.value}`;
+  await get(url, params).then((res) => {
+    if (res.success || res.length > 0) {
+      console.log(">>>", res);
       loading.value = false;
       let obj = {};
       if (sort.value == "bing") {
         obj.imgurl = res.data.url;
         list.value[sort.value].push(obj);
-        console.log("bing", list.value[sort.value]);
+      } else if (sort.value == "cat") {
+        res.forEach((v) => {
+          list.value[sort.value].push({ imgurl: v.url });
+        });
       } else {
         obj.imgurl = res.imgurl;
         list.value[sort.value].push(obj);
@@ -118,13 +130,13 @@ async function onLoad() {
     } else {
       loading.value = false;
     }
+    if (list.value[sort.value].length >= 10) {
+      finished.value = true;
+    }
   });
-  if (list.value[sort.value].length == 10) {
-    finished.value = true;
-  }
 }
 function initLoad() {
-  window.scrollTo(0,0)
+  window.scrollTo(0, 0);
   list.value[sort.value] = [];
   loading.value = true;
   finished.value = false;

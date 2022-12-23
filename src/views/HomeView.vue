@@ -11,10 +11,16 @@ const tools = ref([
   { message: "精美壁纸", router: "MobileWallpaper" },
   { message: "音乐", router: "" },
 ]);
-const activeNames = ref(["1", "2"]);
 const textTools = ref([
   { message: "随机笑话", router: "RandomJoke" },
+  { message: "朋友圈文案", router: "MomentsCopywriting" },
 ]);
+const newsTools = ref([
+  { message: "热点NEWS", router: "HotNews" },
+  { message: "汉服NEWS", router: "HanfuNews" },
+]);
+const activeNames = ref(["1", "2", "3"]);
+
 function clickItem(item) {
   router.push(item.router);
 }
@@ -39,7 +45,13 @@ function loadSnow() {
         <van-sidebar-item title="娱乐工具" />
       </van-sidebar> -->
       <van-collapse v-model="activeNames" :border="false">
-        <van-collapse-item title="娱乐工具" name="1" :border="false" icon="graphic">
+        <van-collapse-item
+          title="娱乐工具"
+          name="1"
+          :border="false"
+          icon="graphic"
+          size="large"
+        >
           <div class="content">
             <div
               class="tool-item"
@@ -51,11 +63,35 @@ function loadSnow() {
             </div>
           </div>
         </van-collapse-item>
-        <van-collapse-item title="文字应用" name="2" :border="false" icon="column">
+        <van-collapse-item
+          title="文字应用"
+          name="2"
+          :border="false"
+          icon="column"
+          size="large"
+        >
           <div class="content">
             <div
               class="tool-item"
               v-for="(item, i) in textTools"
+              :key="i"
+              @click="clickItem(item)"
+            >
+              {{ item.message }}
+            </div>
+          </div>
+        </van-collapse-item>
+        <van-collapse-item
+          title="新闻应用"
+          name="3"
+          :border="false"
+          icon="new"
+          size="large"
+        >
+          <div class="content">
+            <div
+              class="tool-item"
+              v-for="(item, i) in newsTools"
               :key="i"
               @click="clickItem(item)"
             >
@@ -112,7 +148,8 @@ function loadSnow() {
 .van-collapse-item {
   margin-bottom: 8px;
 }
-:deep(.van-cell__left-icon){
-  color: var(--van-primary-color);
+:deep(.van-cell__left-icon) {
+  // color: var(--van-primary-color);
+  color: #e83929;
 }
 </style>

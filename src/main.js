@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { Button, TreeSelect, Collapse, CollapseItem, Sidebar, SidebarItem, NavBar, Search, Tag, List} from 'vant';
+import { Button, TreeSelect, Collapse, CollapseItem, Sidebar, SidebarItem, NavBar, Search, Tag, List,Icon,Toast } from 'vant';
 import './assets/css/main.css'
 import 'animate.css';
 const app = createApp(App)
@@ -19,6 +19,9 @@ app.use(NavBar);
 app.use(Search);
 app.use(Tag);
 app.use(List);
+app.use(Icon);
+app.use(Toast);
+
 
 
 //自定义指令全局注册-设置字体颜色

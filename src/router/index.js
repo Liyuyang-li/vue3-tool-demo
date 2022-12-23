@@ -35,6 +35,30 @@ const router = createRouter({
       meta: {
         keepAlive: true // 该路由会被缓存
       }
+    },
+    {
+      path: '/HanfuNews',
+      name: 'HanfuNews',
+      component: () => import('../views/HanfuNews.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
+    },
+    {
+      path: '/MomentsCopywriting',
+      name: 'MomentsCopywriting',
+      component: () => import('../views/MomentsCopywriting.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
+    },
+    {
+      path: '/HotNews',
+      name: 'HotNews',
+      component: () => import('../views/HotNews.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
     }
   ]
 })
