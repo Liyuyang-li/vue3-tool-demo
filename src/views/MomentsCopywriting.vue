@@ -40,7 +40,7 @@ function copyFunction(data) {
 onMounted(() => {onLoad();});
 </script>
 <template>
-  <div class="MomentsCopywriting">
+  <div class="MomentsCopywriting bg-img-blur">
     <div class="head-title">朋友圈文案</div>
     <div
       class="joke-card animate__animated prev"
@@ -67,7 +67,7 @@ onMounted(() => {onLoad();});
 </template>
 <style lang="less" scoped>
 .MomentsCopywriting {
-  height: calc(100vh - 46px);
+  height:100vh;
   overflow-x: hidden;
   .head-title {
     font-weight: bold;

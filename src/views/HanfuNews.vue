@@ -138,7 +138,7 @@ function initLoad() {
 }
 function clickItem(data) {
   console.log("data", data);
-  window.open(data.url);
+  window.open(data.url, "_blank");
 }
 onMounted(() => {
   list.value = [];

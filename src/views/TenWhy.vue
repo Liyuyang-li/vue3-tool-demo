@@ -11,11 +11,11 @@ const prev = ref(true);
 const next = ref(false);
 
 async function onLoad() {
-  let params = { type: "json" };
-  await get(`https://api.vvhan.com/api/joke`, params).then((res) => {
-    if (res.success) {
-        joke.value.title = res.title;
-        joke.value.joke = res.joke;
+  let params = { key: "192299f12ff4f65053783ab28f3c5030" };
+  await get(`https://apis.tianapi.com/tenwhy/index`, params).then((res) => {
+    if (res.code==200) {
+        joke.value.title = res.result.list[0].title;
+        joke.value.joke = res.result.list[0].content;
     } else {
     }
   });
@@ -30,8 +30,8 @@ function initLoad() {
 onMounted(() => {onLoad();});
 </script>
 <template>
-  <div class="RandomJoke bg-img-blur">
-    <div class="head-title">每日一笑</div>
+  <div class="TenWhy bg-img-blur">
+    <div class="head-title">每日一问</div>
     <div
       class="joke-card animate__animated prev"
       :class="prev ? 'animate__backInRight' : 'animate__backOutLeft'"
@@ -50,11 +50,11 @@ onMounted(() => {onLoad();});
       <div class="title">{{ joke.title }}</div>
       <div class="joke">{{ joke.joke }}</div>
     </div>
-    <div class="load-btn" @click="initLoad">换一句</div>
+    <div class="load-btn" @click="initLoad">换一个</div>
   </div>
 </template>
 <style lang="less" scoped>
-.RandomJoke {
+.TenWhy {
   height: 100vh;
   overflow-x: hidden;
   .head-title {

@@ -1,8 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -56,6 +56,14 @@ const router = createRouter({
       path: '/HotNews',
       name: 'HotNews',
       component: () => import('../views/HotNews.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
+    },
+    {
+      path: '/TenWhy',
+      name: 'TenWhy',
+      component: () => import('../views/TenWhy.vue'),
       meta: {
         keepAlive: true // 该路由会被缓存
       }

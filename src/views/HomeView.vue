@@ -12,8 +12,9 @@ const tools = ref([
   { message: "音乐", router: "" },
 ]);
 const textTools = ref([
-  { message: "随机笑话", router: "RandomJoke" },
+  { message: "每日一笑", router: "RandomJoke" },
   { message: "朋友圈文案", router: "MomentsCopywriting" },
+  { message: "十万个为什么", router: "TenWhy" },
 ]);
 const newsTools = ref([
   { message: "热点NEWS", router: "HotNews" },
@@ -35,7 +36,7 @@ function loadSnow() {
 }
 </script>
 <template>
-  <div class="home">
+  <div class="home bg-img-blur">
     <van-nav-bar title="工具合集" />
     <div class="snow" @click="loadSnow">
       <img src="@/assets/images/snow.png" alt="" />
