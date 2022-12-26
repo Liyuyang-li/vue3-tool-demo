@@ -7,7 +7,7 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## 项目演示
 
- [项目演示](https://static-mp-9fa3ef21-1305-46ae-acd7-3683eaf7110a.next.bspapp.com/#/).
+ 查看[项目演示](https://static-mp-9fa3ef21-1305-46ae-acd7-3683eaf7110a.next.bspapp.com/#/)
 
 ## Recommended IDE Setup 推荐IDE设置
 
@@ -34,5 +34,4 @@ npm run dev
 ```sh
 npm run build
 ```
-# vue3-tool-demo
 
