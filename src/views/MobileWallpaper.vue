@@ -10,14 +10,15 @@ const wenanTitle = ref("");
 const tenwhys = ref([]);
 const searchValue = ref();
 const classifiction = ref([
+  { name: "猫", isSelect: false },
   { name: "动漫", isSelect: false },
   { name: "美女", isSelect: false },
   { name: "二次元", isSelect: false },
   { name: "风景", isSelect: false },
   { name: "手机壁纸", isSelect: false },
-  // { name: "LOL", isSelect: false },
+  { name: "LOL", isSelect: false },
   { name: "Bing", isSelect: false },
-  { name: "猫", isSelect: false },
+  
 ]);
 const selectedClassifiction = ref([]);
 const colors = ref([
@@ -39,34 +40,9 @@ const list = ref({
 });
 const loading = ref(false);
 const finished = ref(false);
-const sort = ref("acgimg");
+const sort = ref("cat");
 const count = ref(0);
-async function onLoad1() {
-  // 调用api接口，并且提供了两个参数
 
-  await get("/pyqwenan/index", {
-    key: "192299f12ff4f65053783ab28f3c5030",
-  }).then((res) => {
-    wenan.value = res.result.content;
-    wenanTitle.value = res.result.source;
-    console.log(res);
-  });
-}
-async function tenwhy() {
-  // 调用api接口，并且提供了两个参数
-  await get("/tenwhy/index", {
-    key: "192299f12ff4f65053783ab28f3c5030",
-  }).then((res) => {
-    tenwhys.value.push({
-      quetion: res.result.list[0].title,
-      answer: res.result.list[0].content,
-    });
-  });
-}
-function init() {
-  onLoad();
-  tenwhy();
-}
 function onClickLeft() {
   router.back();
 }
@@ -97,7 +73,7 @@ function tottleTag(item, i) {
     ? "bing"
     : selected.includes("猫")
     ? "cat"
-    : "acgimg";
+    : "cat";
 
   console.log("sort.value", sort.value);
   if (!selectedClassifiction.value.join().includes(item.name)) {
@@ -113,7 +89,7 @@ async function onLoad() {
       : `https://api.vvhan.com/api/${sort.value}`;
   await get(url, params).then((res) => {
     if (res.success || res.length > 0) {
-      console.log(">>>", res);
+      console.log(">>>", window.location.href);
       loading.value = false;
       let obj = {};
       if (sort.value == "bing") {
@@ -123,10 +99,14 @@ async function onLoad() {
         res.forEach((v) => {
           list.value[sort.value].push({ imgurl: v.url });
         });
+      }else if (sort.value == "lolskin") {
+        obj.imgurl = "data:image/jpeg;base64,"+res;
+        list.value[sort.value].push(obj);
       } else {
         obj.imgurl = res.imgurl;
         list.value[sort.value].push(obj);
       }
+      console.log('>>>>>',list.value[sort.value])
     } else {
       loading.value = false;
     }
@@ -171,7 +151,6 @@ watch(searchValue, (newsearchValue) => {
   initLoad();
 });
 onMounted(() => {
-  // init();
 });
 </script>
 <template>

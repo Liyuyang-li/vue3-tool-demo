@@ -1,3 +1,8 @@
+/*
+ * @Author: liyy
+ * @Date: 2022-11-25 16:41:36
+ * @Description: 
+ */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
@@ -18,7 +23,10 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/AboutView.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
     },
     {
       path: '/MobileWallpaper',
@@ -66,6 +74,30 @@ const router = createRouter({
       component: () => import('../views/TenWhy.vue'),
       meta: {
         keepAlive: true // 该路由会被缓存
+      }
+    },
+    {
+      path: '/TimeWall',
+      name: 'TimeWall',
+      component: () => import('../views/TimeWall.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
+    },
+    {
+      path: '/HandBarrage',
+      name: 'HandBarrage',
+      component: () => import('../views/HandBarrage.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
+    },
+    {
+      path: '/ShowBarrage',
+      name: 'ShowBarrage',
+      component: () => import('../views/ShowBarrage.vue'),
+      meta: {
+        keepAlive: false // 该路由会被缓存
       }
     }
   ]

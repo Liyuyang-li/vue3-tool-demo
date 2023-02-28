@@ -20,7 +20,12 @@ const newsTools = ref([
   { message: "热点NEWS", router: "HotNews" },
   { message: "汉服NEWS", router: "HanfuNews" },
 ]);
-const activeNames = ref(["1", "2", "3"]);
+const userfulTools = ref([
+  { message: "时间屏幕", router: "TimeWall" },
+  { message: "手持弹幕", router: "HandBarrage" },
+  { message: "做个决定", router: "TimeWall" },
+]);
+const activeNames = ref(["1", "2", "3","4"]);
 
 function clickItem(item) {
   router.push(item.router);
@@ -93,6 +98,24 @@ function loadSnow() {
             <div
               class="tool-item"
               v-for="(item, i) in newsTools"
+              :key="i"
+              @click="clickItem(item)"
+            >
+              {{ item.message }}
+            </div>
+          </div>
+        </van-collapse-item>
+        <van-collapse-item
+          title="实用工具"
+          name="4"
+          :border="false"
+          icon="new"
+          size="large"
+        >
+          <div class="content">
+            <div
+              class="tool-item"
+              v-for="(item, i) in userfulTools"
               :key="i"
               @click="clickItem(item)"
             >

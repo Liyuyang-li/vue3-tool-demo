@@ -1,9 +1,16 @@
+/*
+ * @Author: liyy
+ * @Date: 2022-11-25 16:41:36
+ * @Description: 
+ */
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { Button, TreeSelect, Collapse, CollapseItem, Sidebar, SidebarItem, NavBar, Search, Tag, List,Icon,Toast } from 'vant';
+import { Button, TreeSelect, Collapse, CollapseItem, Sidebar, SidebarItem, NavBar, Search, Tag, List, Icon, Toast, Field, CellGroup, Slider } from 'vant';
 import './assets/css/main.css'
 import 'animate.css';
+
+
 const app = createApp(App)
 
 app.use(router)
@@ -21,7 +28,9 @@ app.use(Tag);
 app.use(List);
 app.use(Icon);
 app.use(Toast);
-
+app.use(Field);
+app.use(CellGroup); 
+app.use(Slider);
 
 
 //自定义指令全局注册-设置字体颜色
