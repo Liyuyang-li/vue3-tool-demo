@@ -9,7 +9,7 @@ import router from './router'
 import { Button, TreeSelect, Collapse, CollapseItem, Sidebar, SidebarItem, NavBar, Search, Tag, List, Icon, Toast, Field, CellGroup, Slider } from 'vant';
 import './assets/css/main.css'
 import 'animate.css';
-
+import './assets/js/colorPicker'
 
 const app = createApp(App)
 
