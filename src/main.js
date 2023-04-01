@@ -6,7 +6,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { Button, TreeSelect, Collapse, CollapseItem, Sidebar, SidebarItem, NavBar, Search, Tag, List, Icon, Toast, Field, CellGroup, Slider } from 'vant';
+import {
+    Button, TreeSelect, Collapse, CollapseItem, Sidebar, SidebarItem, NavBar, Search,
+    Tag, List, Icon, Toast, Field, CellGroup, Slider, ActionSheet
+} from 'vant';
 import './assets/css/main.css'
 import 'animate.css';
 import './assets/js/colorPicker'
@@ -29,9 +32,9 @@ app.use(List);
 app.use(Icon);
 app.use(Toast);
 app.use(Field);
-app.use(CellGroup); 
+app.use(CellGroup);
 app.use(Slider);
-
+app.use(ActionSheet);
 
 //自定义指令全局注册-设置字体颜色
 app.directive('color', (el, binding) => {

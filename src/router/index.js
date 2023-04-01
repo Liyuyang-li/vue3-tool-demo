@@ -99,6 +99,14 @@ const router = createRouter({
       meta: {
         keepAlive: false // 该路由会被缓存
       }
+    },
+    {
+      path: '/MakeDecision',
+      name: 'MakeDecision',
+      component: () => import('../views/MakeDecision.vue'),
+      meta: {
+        keepAlive: true // 该路由会被缓存
+      }
     }
   ]
 })

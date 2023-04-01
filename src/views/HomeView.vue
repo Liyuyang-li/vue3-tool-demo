@@ -23,7 +23,7 @@ const newsTools = ref([
 const userfulTools = ref([
   { message: "时间屏幕", router: "TimeWall" },
   { message: "手持弹幕", router: "HandBarrage" },
-  { message: "做个决定", router: "TimeWall" },
+  { message: "做个决定", router: "MakeDecision" },
 ]);
 const activeNames = ref(["1", "2", "3","4"]);
 
